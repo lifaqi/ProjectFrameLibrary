@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ProjectFrameLibrary'
-  s.version          = '0.1.0'
-  s.summary          = '项目框架常用的一些库的封装。'
+  s.version          = '0.1.1'
+  s.summary          = 'iOS项目框架常用的一些库的封装。'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -41,14 +41,14 @@ TODO: Add long description of the pod here.
   # s.dependency 'AFNetworking', '~> 2.3'
   # 自动布局
   s.dependency 'SnapKit'
-  # 自动布局
-  s.dependency 'MJRefresh'
+  # 刷新
+    #s.dependency 'MJRefresh'
   # 加载进度条
-  s.dependency 'SVProgressHUD'
+    #s.dependency 'SVProgressHUD'
   # 数据解析
-  s.dependency 'ObjectMapper'
+    #s.dependency 'ObjectMapper'
   # 网路请求
-  s.dependency 'Moya'
+    #s.dependency 'Moya'
   # 获取设备信息
   s.dependency 'FCUUID'
 end
