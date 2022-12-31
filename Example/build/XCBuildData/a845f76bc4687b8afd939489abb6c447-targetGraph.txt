@@ -1,0 +1,6 @@
+Target dependency graph (3 targets)
+ProjectFrameLibrary in Pods, no dependencies
+Pods-ProjectFrameLibrary_Example in Pods, depends on:
+ProjectFrameLibrary in Pods (explicit)
+Pods-ProjectFrameLibrary_Tests in Pods, depends on:
+Pods-ProjectFrameLibrary_Example in Pods (explicit)

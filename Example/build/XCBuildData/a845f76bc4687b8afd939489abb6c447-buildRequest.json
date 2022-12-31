@@ -1,0 +1,51 @@
+{
+  "_buildCommand2" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : false,
+    "targets" : null
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98ffeaac7838acbad81379d4b21e1f1289"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e9837cf8e7325217f5570f5f58edd962444"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98bf57e7513bd2d35f7238b3ba9ad4ef00"
+    }
+  ],
+  "containerPath" : "/Users/lifaqi/Documents/Project/Pods/ProjectFrameLibrary/Example/Pods/Pods.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "",
+      "buildProductsPath" : "",
+      "derivedDataPath" : "/Users/lifaqi/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/lifaqi/Library/Developer/Xcode/DerivedData/Pods-dclzxdonecuedlchlystwwpjftwr/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/lifaqi/Library/Developer/Xcode/DerivedData/Pods-dclzxdonecuedlchlystwwpjftwr/Index.noindex/PrecompiledHeaders",
+      "pchPath" : ""
+    },
+    "configurationName" : "Release",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "schemeCommand2" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : true,
+  "useImplicitDependencies" : false,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : false
+}

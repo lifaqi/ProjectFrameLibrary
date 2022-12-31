@@ -1,0 +1,16 @@
+PODS:
+  - ProjectFrameLibrary (0.1.0)
+
+DEPENDENCIES:
+  - ProjectFrameLibrary (from `../`)
+
+EXTERNAL SOURCES:
+  ProjectFrameLibrary:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ProjectFrameLibrary: 1c282a10db8aa19767f2dbe87b4da041802ba302
+
+PODFILE CHECKSUM: 8cb73e2e45008f8875e3ec4a89a36474340d906f
+
+COCOAPODS: 1.11.3

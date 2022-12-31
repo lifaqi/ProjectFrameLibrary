@@ -1,0 +1,6 @@
+framework module ProjectFrameLibrary {
+  umbrella header "ProjectFrameLibrary-umbrella.h"
+
+  export *
+  module * { export * }
+}
