@@ -8,6 +8,11 @@
 import UIKit
 
 class BaseNavigationController: UIViewController {
+    private var navigationBarColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    private var titleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    private var leftTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    private var rightTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    
     let group = AsyncGroup()
     
     /// 是否禁用侧滑返回，默认是：false
@@ -62,7 +67,7 @@ class BaseNavigationController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = BackGroundColor
+        view.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: 1)
 
         self.mainNavView()
         
@@ -84,7 +89,7 @@ class BaseNavigationController: UIViewController {
     func mainNavView() {
         // headerView
         headerView = UIView()
-        headerView.backgroundColor = NavigationBarColor;
+        headerView.backgroundColor = navigationBarColor;
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalTo(0)
@@ -94,7 +99,7 @@ class BaseNavigationController: UIViewController {
         // baseTitleLbl
         baseTitleLbl = UILabel()
         baseTitleLbl.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        baseTitleLbl.textColor = NavigationTitleColor
+        baseTitleLbl.textColor = titleColor
         baseTitleLbl.text = baseNavTitle ?? ""
         headerView.addSubview(baseTitleLbl)
         baseTitleLbl.snp.makeConstraints { make in
@@ -106,7 +111,7 @@ class BaseNavigationController: UIViewController {
         // leftBtn
         leftBtn = UIButton()
         leftBtn.titleLabel?.font = UIFont .systemFont(ofSize: 15)
-        leftBtn.setTitleColor(NavigationTitleColor, for: .normal)
+        leftBtn.setTitleColor(leftTitleColor, for: .normal)
         leftBtn.addTarget(self, action: #selector(clickLeftButtonEvent), for: .touchUpInside)
         headerView.addSubview(leftBtn)
         leftBtn.snp.makeConstraints { make in
@@ -130,7 +135,7 @@ class BaseNavigationController: UIViewController {
         rightBtn = UIButton()
         rightBtn.titleLabel?.font = UIFont .systemFont(ofSize: 15)
         rightBtn.contentHorizontalAlignment = .center
-        rightBtn.setTitleColor(NavigationTitleColor, for: .normal)
+        rightBtn.setTitleColor(rightTitleColor, for: .normal)
         rightBtn.isUserInteractionEnabled = false
         rightBtn.addTarget(self, action: #selector(clickRightButtonEvent), for: .touchUpInside)
         headerView.addSubview(rightBtn)

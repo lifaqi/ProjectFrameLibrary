@@ -29,6 +29,7 @@ TODO: Add long description of the pod here.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '11.0'
+  s.swift_version = '5.0'
 
   s.source_files = 'ProjectFrameLibrary/Classes/**/*'
   
@@ -42,15 +43,19 @@ TODO: Add long description of the pod here.
   # 自动布局
   s.dependency 'SnapKit'
   # 刷新
-    #s.dependency 'MJRefresh'
+  s.dependency 'MJRefresh'
   # 加载进度条
-    #s.dependency 'SVProgressHUD'
+  s.dependency 'SVProgressHUD'
   # 数据解析
-    #s.dependency 'ObjectMapper'
+  s.dependency 'ObjectMapper'
   # 网路请求
-    #s.dependency 'Moya'
+  s.dependency 'Moya'
   # 获取设备信息
   s.dependency 'FCUUID'
+  # Async
+  s.dependency "AsyncSwift"
+  # 对NSUserDefaults的封装
+  s.dependency 'SwiftyUserDefaults'
 end
   
 
