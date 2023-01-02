@@ -12,8 +12,8 @@ enum Language : String {
     case chinese = "zh-Hans"
 }
 
-public class BundleEx: Bundle {
-    override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
+open class BundleEx: Bundle {
+    open override func localizedString(forKey key: String, value: String?, table tableName: String?) -> String {
         if let bundle = Bundle.getLanguageBundel() {
             return bundle.localizedString(forKey: key, value: value, table: tableName)
         }else{

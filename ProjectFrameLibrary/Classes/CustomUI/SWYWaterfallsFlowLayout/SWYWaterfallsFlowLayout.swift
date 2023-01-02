@@ -15,7 +15,7 @@ import UIKit
     func columnCountInWaterfallsFlowLayout(waterfallsFlowLayout: SWYWaterfallsFlowLayout) -> NSInteger
 }
 
-open class SWYWaterfallsFlowLayout: UICollectionViewFlowLayout {
+public class SWYWaterfallsFlowLayout: UICollectionViewFlowLayout {
     /// 代理
     weak var delegate: SWYWaterfallsFlowLayoutDeleaget?
     
@@ -30,7 +30,7 @@ open class SWYWaterfallsFlowLayout: UICollectionViewFlowLayout {
     var contentHeight: CGFloat = 0
     
     // MARK: - 初始化
-    override func prepare() {
+    public override func prepare() {
         super.prepare()
         
         if delegate != nil {
@@ -76,14 +76,14 @@ open class SWYWaterfallsFlowLayout: UICollectionViewFlowLayout {
 
 extension SWYWaterfallsFlowLayout {
     
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    public override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         // 返回相交的区域
         return attrsArr.filter {
             $0.frame.intersects(rect)
         }
     }
     
-    override var collectionViewContentSize: CGSize {
+    public override var collectionViewContentSize: CGSize {
         return CGSize(width: collectionView!.bounds.width, height: contentHeight)
     }
 }

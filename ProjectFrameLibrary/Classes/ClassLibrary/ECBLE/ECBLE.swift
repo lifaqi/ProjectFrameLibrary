@@ -31,7 +31,7 @@ public class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         super.init()
     }
 
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
             bleAdapterState = true
@@ -76,13 +76,13 @@ public class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         ecCBCentralManager.cancelPeripheralConnection(ecPeripheral)
     }
 
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         ecPeripheral = peripheral
         ecPeripheral.delegate = self
         connectCallback(true, "")
     }
 
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         connectCallback(false, error.debugDescription)
     }
 
@@ -90,7 +90,7 @@ public class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         disconnectCallback = cb
     }
 
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+    public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         disconnectCallback(error.debugDescription)
     }
 
@@ -99,7 +99,7 @@ public class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         ecPeripheral.discoverServices(nil)
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         ecPeripheralServices = peripheral.services ?? []
         var servicesUUID: [String] = []
         for item in ecPeripheralServices {
@@ -120,7 +120,7 @@ public class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         discoverCharacteristicsCallback([])
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         ecPeripheralCharacteristics = service.characteristics ?? []
         var characteristicsUUID: [String] = []
         for item in ecPeripheralCharacteristics {
@@ -158,7 +158,7 @@ public class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
         NSLog("rssi:" + RSSI.stringValue)
     }
     
@@ -166,7 +166,7 @@ public class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         characteristicChangeCallback = cb
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if characteristic.value == nil { return }
         let str = String(data: characteristic.value!, encoding: String.Encoding.utf8) ?? ""
         let hexStr = dataToHexString(data: characteristic.value!)

@@ -14,9 +14,9 @@ var endTime: Date?
 
 private var _isClickDelay = false
 
-typealias BtnAction = (UIButton)->()
+public typealias BtnAction = (UIButton)->()
 
-enum ButtonImageStyle {
+public enum ButtonImageStyle {
     case top /// image在上，label在下
     case left /// image在左，label在右
     case bottom /// image在下，label在上
@@ -39,7 +39,7 @@ public extension UIButton {
     }
     
     /// 按钮扩大点击区域
-    public func expandSize(size:CGFloat) {
+    func expandSize(size:CGFloat) {
         objc_setAssociatedObject(self, &expandSizeKey,size, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
     }
     private func expandRect() -> CGRect {
@@ -50,7 +50,7 @@ public extension UIButton {
             return bounds
         }
     }
-    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let buttonRect =  expandRect()
         if (buttonRect.equalTo(bounds)) {
             return super.point(inside: point, with: event)

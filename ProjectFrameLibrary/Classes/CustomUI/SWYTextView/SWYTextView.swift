@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class SWYTextView: UITextView {
+public class SWYTextView: UITextView {
 
     var baseMaxHeight = 150.0 // 定义最大高度
     var baseMaxWordNum = 0
@@ -30,7 +30,7 @@ open class SWYTextView: UITextView {
 }
 
 extension SWYTextView: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
+    public func textViewDidChange(_ textView: UITextView) {
         // 获取frame值
         let frame = textView.frame
         // 定义一个constrainSize值用于计算textview的高度
@@ -55,7 +55,7 @@ extension SWYTextView: UITextViewDelegate {
         }
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if baseMaxWordNum != 0 {
             if range.length == 0 && text == " " {
                 return false

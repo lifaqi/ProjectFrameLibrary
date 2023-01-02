@@ -7,14 +7,14 @@
 
 import UIKit
 
-open class SWYUILabel: UILabel {
+public class SWYUILabel: UILabel {
     var textContainerInset: UIEdgeInsets = UIEdgeInsets.zero
     
-    override func drawText(in rect: CGRect) {
+    public override func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: textContainerInset))
     }
     
-    override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+    public override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
         let insets = textContainerInset
         var rect = super.textRect(forBounds: bounds.inset(by: insets), limitedToNumberOfLines: numberOfLines)
         

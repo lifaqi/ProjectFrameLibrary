@@ -15,8 +15,8 @@ private var _topPaddding = 15.ad
 private var _maxHeight = 150.0
 private var _maxWordNum = 0
 
-typealias ShouldChangeTextInCallBack = (_ textView: UITextView, _ range: NSRange, _ text: String) -> (Bool)
-typealias TextViewDidChangeCallBack = (_ textView: UITextView) -> ()
+public typealias ShouldChangeTextInCallBack = (_ textView: UITextView, _ range: NSRange, _ text: String) -> (Bool)
+public typealias TextViewDidChangeCallBack = (_ textView: UITextView) -> ()
 
 var textView: SWYTextView!
 

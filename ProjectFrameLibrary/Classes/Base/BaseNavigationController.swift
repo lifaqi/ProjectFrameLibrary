@@ -8,10 +8,10 @@
 import UIKit
 
 open class BaseNavigationController: UIViewController {
-    static var navigationBarColor = UIColor(r: 245, g: 245, b: 245, a: 1)
-    static var titleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
-    static var leftTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
-    static var rightTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    private var navigationBarColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    private var titleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    private var leftTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    private var rightTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
     
     let group = AsyncGroup()
     
@@ -48,7 +48,7 @@ open class BaseNavigationController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if isDisabledSideSlip {
@@ -56,7 +56,7 @@ open class BaseNavigationController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         if isDisabledSideSlip {
@@ -64,7 +64,7 @@ open class BaseNavigationController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(r: 255, g: 255, b: 255, a: 1)
@@ -89,7 +89,7 @@ open class BaseNavigationController: UIViewController {
     func mainNavView() {
         // headerView
         headerView = UIView()
-        headerView.backgroundColor = BaseNavigationController.navigationBarColor;
+        headerView.backgroundColor = navigationBarColor;
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalTo(0)
@@ -99,7 +99,7 @@ open class BaseNavigationController: UIViewController {
         // baseTitleLbl
         baseTitleLbl = UILabel()
         baseTitleLbl.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        baseTitleLbl.textColor = BaseNavigationController.titleColor
+        baseTitleLbl.textColor = titleColor
         baseTitleLbl.text = baseNavTitle ?? ""
         headerView.addSubview(baseTitleLbl)
         baseTitleLbl.snp.makeConstraints { make in
@@ -111,7 +111,7 @@ open class BaseNavigationController: UIViewController {
         // leftBtn
         leftBtn = UIButton()
         leftBtn.titleLabel?.font = UIFont .systemFont(ofSize: 15)
-        leftBtn.setTitleColor(BaseNavigationController.leftTitleColor, for: .normal)
+        leftBtn.setTitleColor(leftTitleColor, for: .normal)
         leftBtn.addTarget(self, action: #selector(clickLeftButtonEvent), for: .touchUpInside)
         headerView.addSubview(leftBtn)
         leftBtn.snp.makeConstraints { make in
@@ -135,7 +135,7 @@ open class BaseNavigationController: UIViewController {
         rightBtn = UIButton()
         rightBtn.titleLabel?.font = UIFont .systemFont(ofSize: 15)
         rightBtn.contentHorizontalAlignment = .center
-        rightBtn.setTitleColor(BaseNavigationController.rightTitleColor, for: .normal)
+        rightBtn.setTitleColor(rightTitleColor, for: .normal)
         rightBtn.isUserInteractionEnabled = false
         rightBtn.addTarget(self, action: #selector(clickRightButtonEvent), for: .touchUpInside)
         headerView.addSubview(rightBtn)
