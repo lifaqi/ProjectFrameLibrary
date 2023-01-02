@@ -10,58 +10,58 @@ import UIKit
 // MARK: - 尺寸大小
 let window = UIApplication.keyWindow
 
-let SafeAreaInsets = window?.safeAreaInsets
-let StatusBarHeight: CGFloat = UIApplication.getStatusBarHeight()
-let NavigationBarHeight: CGFloat = 44
-let HeaderHeight = StatusBarHeight + NavigationBarHeight
-let TabBarHeight: CGFloat = (SafeAreaInsets?.bottom ?? 0) + 49
-let ScreenWidth = UIScreen.main.bounds.size.width
-let ScreenHeight = UIScreen.main.bounds.size.height
+public let SafeAreaInsets = window?.safeAreaInsets
+public let StatusBarHeight: CGFloat = UIApplication.getStatusBarHeight()
+public let NavigationBarHeight: CGFloat = 44
+public let HeaderHeight = StatusBarHeight + NavigationBarHeight
+public let TabBarHeight: CGFloat = (SafeAreaInsets?.bottom ?? 0) + 49
+public let ScreenWidth = UIScreen.main.bounds.size.width
+public let ScreenHeight = UIScreen.main.bounds.size.height
 
-let UIScreenWidth = 375.0 // UI设计原型图的手机尺寸宽度
+public var UIScreenWidth = 375.0 // UI设计原型图的手机尺寸宽度
 
 // MARK: - 颜色
-func rgba(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) -> UIColor {
+public func rgba(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) -> UIColor {
     return UIColor(r: r, g: g, b: b, a: a)
 }
 
-let SeparatorColor = UIColor(r: 230, g: 230, b: 230, a: 1)
-let BlackColor = UIColor(r: 25, g: 25, b: 25, a: 1)
+public let SeparatorColor = UIColor(r: 230, g: 230, b: 230, a: 1)
+public let BlackColor = UIColor(r: 25, g: 25, b: 25, a: 1)
 
 //  MARK: - 获取系统版本号和历史版本号
 //获取当前版本号
-let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+public let currentVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
 // 获取历史版本号
-let sandboxVersion = UserDefaults.standard.object(forKey: "CFBundleShortVersionString") as? String ?? ""
+public let sandboxVersion = UserDefaults.standard.object(forKey: "CFBundleShortVersionString") as? String ?? ""
 
 // MARK: - 获取APP信息、名称、版本号以及build版本号
 /// 获取app信息
-let infoDictionary : Dictionary = Bundle.main.infoDictionary!
+public let infoDictionary : Dictionary = Bundle.main.infoDictionary!
 /// 程序名称
-let appDisplayName : String = infoDictionary["CFBundleDisplayName"] as! String
+public let appDisplayName : String = infoDictionary["CFBundleDisplayName"] as! String
 /// 版本号
-let majorVersion : String = infoDictionary ["CFBundleShortVersionString"] as! String
+public let majorVersion : String = infoDictionary ["CFBundleShortVersionString"] as! String
 /// build号
-let minorVersion : String = infoDictionary ["CFBundleVersion"] as! String
+public let minorVersion : String = infoDictionary ["CFBundleVersion"] as! String
 
 // MARK: - 获取设备信息
 /// 系统名称
-let systemName : String = UIDevice.current.systemName
+public let systemName : String = UIDevice.current.systemName
 /// ios版本
-let iosVersion : NSString = UIDevice.current.systemVersion as NSString
+public let iosVersion : NSString = UIDevice.current.systemVersion as NSString
 /// 设备udid
-let identifierNumber  = UIDevice.current.identifierForVendor
+public let identifierNumber  = UIDevice.current.identifierForVendor
 /// 设备名称
-let deviceName : String = UIDevice.current.name
+public let deviceName : String = UIDevice.current.name
 /// 设备型号
-let deviceModel = UIDevice.current.model
+public let deviceModel = UIDevice.current.model
 /// 设备区域化型号如A1533
-let deviceLocalizedModel = UIDevice.current.localizedModel
+public let deviceLocalizedModel = UIDevice.current.localizedModel
 /// 设备UUID
-let deviceUUID = FCUUID.uuidForDevice()
+public let deviceUUID = FCUUID.uuidForDevice()
 
 // MARK: - 常用参数
-var dateFormatter: DateFormatter = {
+public var dateFormatter: DateFormatter = {
     let df = DateFormatter()
     df.timeZone = TimeZone.current
     df.locale = Locale.current // Locale.init(identifier: "zh_CN")

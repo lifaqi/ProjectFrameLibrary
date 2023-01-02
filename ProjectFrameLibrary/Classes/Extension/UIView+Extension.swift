@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     /// 添加圆角
     var cornerRadius: Double {
         get{

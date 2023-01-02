@@ -7,4 +7,4 @@
 
 import Foundation
 
-let CancelRefreshLoading = Notification.Name(rawValue: "CancelRefreshLoading")
+public let CancelRefreshLoading = Notification.Name(rawValue: "CancelRefreshLoading")

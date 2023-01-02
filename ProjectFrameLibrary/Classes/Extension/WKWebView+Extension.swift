@@ -7,7 +7,7 @@
 
 import WebKit
 
-extension WKWebView {
+public extension WKWebView {
     static func createWebView() -> WKWebView {
         let wkWebConfig = WKWebViewConfiguration()
         let wkUController = WKUserContentController()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SWYTextView: UITextView {
+open class SWYTextView: UITextView {
 
     var baseMaxHeight = 150.0 // 定义最大高度
     var baseMaxWordNum = 0

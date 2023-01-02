@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseCollectionViewCell: UICollectionViewCell {
+open class BaseCollectionViewCell: UICollectionViewCell {
     static var reuseIdentifier: String {
         return NSStringFromClass(self)
     }

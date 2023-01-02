@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseNavigationController: UIViewController {
+open class BaseNavigationController: UIViewController {
     static var navigationBarColor = UIColor(r: 245, g: 245, b: 245, a: 1)
     static var titleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
     static var leftTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)

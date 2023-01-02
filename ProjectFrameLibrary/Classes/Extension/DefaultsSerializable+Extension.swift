@@ -7,12 +7,12 @@
 
 import Foundation
 
-extension DefaultsSerializable where Self: Codable {
+public extension DefaultsSerializable where Self: Codable {
     typealias Bridge = DefaultsCodableBridge<Self>
     typealias ArrayBridge = DefaultsCodableBridge<[Self]>
 }
 
-extension DefaultsSerializable where Self: RawRepresentable {
+public extension DefaultsSerializable where Self: RawRepresentable {
     typealias Bridge = DefaultsRawRepresentableBridge<Self>
     typealias ArrayBridge = DefaultsRawRepresentableArrayBridge<[Self]>
 }

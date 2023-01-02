@@ -9,7 +9,7 @@ import Foundation
 
 var _auto: Double = 0.0
 
-extension Double {
+public extension Double {
     var ad: Double {
         get{
             return self / UIScreenWidth * ScreenWidth

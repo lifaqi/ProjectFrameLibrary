@@ -15,7 +15,7 @@ import UIKit
     func columnCountInWaterfallsFlowLayout(waterfallsFlowLayout: SWYWaterfallsFlowLayout) -> NSInteger
 }
 
-class SWYWaterfallsFlowLayout: UICollectionViewFlowLayout {
+open class SWYWaterfallsFlowLayout: UICollectionViewFlowLayout {
     /// 代理
     weak var delegate: SWYWaterfallsFlowLayoutDeleaget?
     

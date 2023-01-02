@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIAlertController {
+public extension UIAlertController {
     static func alertView(title: String?, msg: String?, cancelButtonTitle: String?, otherButtonTitle: [String?], style: UIAlertController.Style = .alert, cancelButtonColor: UIColor? = nil, otherButtonColor: UIColor? = nil, handler: ((_ index: Int, _ alertAction: UIAlertAction) -> Void)?) {
         let alertController = UIAlertController(title: title, message: msg, preferredStyle: style)
         

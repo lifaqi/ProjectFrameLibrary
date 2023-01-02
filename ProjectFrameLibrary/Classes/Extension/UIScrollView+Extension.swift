@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIScrollView {
+public extension UIScrollView {
     static func createScrollView() -> UIScrollView {
         let scrollView = UIScrollView()
         // 去掉状态栏

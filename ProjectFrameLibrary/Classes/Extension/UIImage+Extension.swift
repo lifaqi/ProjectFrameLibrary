@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIImage {
+public extension UIImage {
     /**
      获取图片中的像素颜色值
      - parameter pos: 图片中的位置

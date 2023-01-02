@@ -23,7 +23,7 @@ enum ButtonImageStyle {
     case right /// image在右，label在左
 }
 
-extension UIButton {
+public extension UIButton {
     static func createButton(size: CGFloat = 16, textColor: UIColor = BlackColor) -> UIButton {
         return self.createButton(size: size, textColor: textColor, style: .regular)
     }

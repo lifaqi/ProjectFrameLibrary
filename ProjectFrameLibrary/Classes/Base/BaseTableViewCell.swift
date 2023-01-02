@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseTableViewCell: UITableViewCell {
+open class BaseTableViewCell: UITableViewCell {
 
     /// 重用标识
     static var reuseIdentifier: String {

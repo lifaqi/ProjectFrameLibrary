@@ -9,7 +9,7 @@ import UIKit
 
 private var _textInsets: UIEdgeInsets = .zero
 
-extension UILabel {
+public extension UILabel {
     /// 设置内边距
     var textInsets: UIEdgeInsets {
         get {

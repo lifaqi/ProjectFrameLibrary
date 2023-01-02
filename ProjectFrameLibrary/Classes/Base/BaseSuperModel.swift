@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseSuperModel: Mappable {
+open class BaseSuperModel: Mappable {
     
     init() {
         

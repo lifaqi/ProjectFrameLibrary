@@ -7,6 +7,6 @@
 
 import UIKit
 
-class BaseViewController: BaseNavigationController {
+open class BaseViewController: BaseNavigationController {
     
 }

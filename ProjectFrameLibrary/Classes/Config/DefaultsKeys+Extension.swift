@@ -9,8 +9,10 @@ import Foundation
 import SwiftyUserDefaults
 
 extension DefaultsKeys {
-    var isFirstLogin: DefaultsKey<Bool> {.init("isFirstLogin", defaultValue: true)}
-    var isLogin: DefaultsKey<Bool> {.init("isLogin", defaultValue: false)}
-    
-    var appLanguage: DefaultsKey<String> {.init("appLanguage", defaultValue: NSLocale.preferredLanguages.first!)}
+    /// 是否是首次打开App，默认true
+    public var isFirstOpen: DefaultsKey<Bool> {.init("isFirstOpen", defaultValue: true)}
+    /// 是否登陆，默认false
+    public var isLogin: DefaultsKey<Bool> {.init("isLogin", defaultValue: false)}
+    /// 语言管理，默认是系统设置的语言
+    public var appLanguage: DefaultsKey<String> {.init("appLanguage", defaultValue: NSLocale.preferredLanguages.first!)}
 }

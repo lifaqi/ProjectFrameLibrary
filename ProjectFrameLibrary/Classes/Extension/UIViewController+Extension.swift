@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension UIViewController {
+public extension UIViewController {
     func popGestureClose() {
         if let ges = self.navigationController?.interactivePopGestureRecognizer?.view?.gestureRecognizers {
             for item in ges {

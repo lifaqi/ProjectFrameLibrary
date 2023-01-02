@@ -11,7 +11,7 @@ import ObjectMapper
 
 
 // MARK: - Json -> Model
-extension Response {
+public extension Response {
     // 将Json解析为单个Model
     public func mapBaseModel<T: BaseMappable>(_ type: T.Type) throws -> T {
         guard let json = try mapJSON() as? [String : Any] else {

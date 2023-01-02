@@ -22,7 +22,7 @@ var textView: SWYTextView!
 
 var placeholderLabel: UILabel!
 
-extension UITextView {
+public extension UITextView {
     
     // MARK: - property
     var placeholder: String {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIImageView {
+public extension UIImageView {
     static func createImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true

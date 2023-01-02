@@ -10,7 +10,7 @@ import Foundation
 
 var ecBLE = ECBLE()
 
-class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+public class ECBLE: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var ecCBCentralManager: CBCentralManager!
     var bleAdapterState: Bool = false
     var initCallback: (Bool, String) -> Void = { _, _ in }

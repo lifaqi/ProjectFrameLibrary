@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SWYUILabel: UILabel {
+open class SWYUILabel: UILabel {
     var textContainerInset: UIEdgeInsets = UIEdgeInsets.zero
     
     override func drawText(in rect: CGRect) {

@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class BaseAlertView: BaseView {
+open class BaseAlertView: BaseView {
     /// 可以自定义父类view
     private var topView: UIView = (UIApplication.getTopViewController()?.view)! {
         didSet {

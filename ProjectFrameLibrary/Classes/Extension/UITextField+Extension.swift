@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UITextField {
+public extension UITextField {
     static func createTextField(size: CGFloat = 16, textColor: UIColor = BlackColor, placeholder: String = "") -> UITextField {
         return self.createTextField(size: size, textColor: textColor, placeholder: placeholder, style: .regular)
     }
