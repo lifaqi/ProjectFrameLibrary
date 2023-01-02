@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ProjectFrameLibrary'
-  s.version          = '0.1.10'
+  s.version          = '0.1.11'
   s.summary          = 'iOS项目框架封装。'
 
 # This description is used to generate tags and improve search results.
@@ -56,6 +56,8 @@ TODO: Add long description of the pod here.
   s.dependency "AsyncSwift"
   # 对NSUserDefaults的封装
   s.dependency 'SwiftyUserDefaults'
+  # 检查应用当前的网络连接状况
+  s.dependency 'ReachabilitySwift'
 end
   
 
