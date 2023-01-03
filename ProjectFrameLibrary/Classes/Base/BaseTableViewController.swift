@@ -9,7 +9,7 @@ import UIKit
 
 private let CellIdentifier = "TableViewCell"
 
-open class BaseTableViewController: BaseNavigationController, UITableViewDataSource, UITableViewDelegate {
+open class BaseTableViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     var edgeInsets: UIEdgeInsets = UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 0)
     

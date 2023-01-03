@@ -9,7 +9,7 @@ import UIKit
 
 private let CellIdentifier = "CollectionViewCell"
 
-open class BaseCollectionViewController: BaseNavigationController {
+open class BaseCollectionViewController: BaseViewController {
 
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
