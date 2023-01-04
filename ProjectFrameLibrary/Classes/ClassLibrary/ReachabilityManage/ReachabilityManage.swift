@@ -8,7 +8,7 @@
 import UIKit
 import Reachability
 
-enum ReachabilityConnectionState {
+public enum ReachabilityConnectionState {
     case wifi
     case cellular
     case unavailable
@@ -19,8 +19,8 @@ public class ReachabilityManage: NSObject {
     var reachabilityManageCallBack: ReachabilityManageCallBack?
     
     /// 监测网络
-    static var sharedInstance = ReachabilityManage()
-    var connectionState: ReachabilityConnectionState!
+    public static var sharedInstance = ReachabilityManage()
+    public var connectionState: ReachabilityConnectionState!
     
     private var reachability: Reachability!
     

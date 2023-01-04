@@ -9,7 +9,7 @@ import UIKit
 
 open class BaseSuperModel: Mappable {
     
-    init() {
+    public init() {
         
     }
     
@@ -17,7 +17,7 @@ open class BaseSuperModel: Mappable {
         
     }
     
-    public func mapping(map: Map) {
+    open func mapping(map: Map) {
         
     }
 }
