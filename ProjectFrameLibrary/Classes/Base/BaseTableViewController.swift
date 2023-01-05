@@ -12,9 +12,11 @@ private let CellIdentifier = "TableViewCell"
 open class BaseTableViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     var edgeInsets: UIEdgeInsets = UIEdgeInsets.init(top: 0, left: 15, bottom: 0, right: 0)
+    var pageNo = 1
+    var pageSize = 20
     
     // view
-    lazy var tableView: UITableView = {
+    public lazy var tableView: UITableView = {
         let tableView = UITableView.init()
         tableView.dataSource = self
         tableView.delegate = self
@@ -39,17 +41,20 @@ open class BaseTableViewController: BaseViewController, UITableViewDataSource, U
         super.mainNavView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(cancelRefreshLoading), name: CancelRefreshLoading, object: nil)
+        
+        /// 启用MJRefresh
+        self.isEnableRefresh = true
     }
     
-    override func initData() {
+    open override func initData() {
         
     }
     
-    override func setupView() {
+    open override func setupView() {
         
     }
     
-    func setupCell() -> UITableViewCell {
+    open func setupCell() -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier)
         if (cell == nil) {
             cell = UITableViewCell(style: .default, reuseIdentifier: CellIdentifier)
@@ -59,12 +64,39 @@ open class BaseTableViewController: BaseViewController, UITableViewDataSource, U
         while cell!.contentView.subviews.last != nil {
             cell!.contentView.subviews.last?.removeFromSuperview()
         }
-
+        
         return cell!
     }
     
+    // MARK: - 属性
+    /// 默认启用MJRefresh
+    public var isEnableRefresh: Bool = true {
+        didSet {
+            if isEnableRefresh {
+                tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
+                tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
+            }else {
+                tableView.mj_header = nil
+                tableView.mj_footer = nil
+            }
+        }
+    }
+    
     // MARK: - 公共方法
-    @objc func refreshData(){
+    /// 下拉刷新
+    @objc open func refreshData(){
+        pageNo = 1
+        getDataSource()
+    }
+    
+    /// 上拉加载更多
+    @objc func loadMoreData(){
+        pageNo += 1
+        getDataSource()
+    }
+    
+    /// 调用接口获取数据
+    open func getDataSource() {
         
     }
     
@@ -80,24 +112,24 @@ open class BaseTableViewController: BaseViewController, UITableViewDataSource, U
     }
 
     // MARK: - UITableViewDataSource
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
 
     // MARK: - UITableViewDelegate
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
 
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if cell.responds(to: #selector(getter: UITableViewCell.separatorInset)) {
             cell.separatorInset = edgeInsets
         }
@@ -111,7 +143,7 @@ open class BaseTableViewController: BaseViewController, UITableViewDataSource, U
         }
     }
     
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     

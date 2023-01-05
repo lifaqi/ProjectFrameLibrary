@@ -10,8 +10,11 @@ import UIKit
 private let CellIdentifier = "CollectionViewCell"
 
 open class BaseCollectionViewController: BaseViewController {
+    
+    var pageNo = 1
+    var pageSize = 20
 
-    lazy var collectionView: UICollectionView = {
+    public lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
@@ -33,17 +36,20 @@ open class BaseCollectionViewController: BaseViewController {
         super.mainNavView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(cancelRefreshLoading), name: CancelRefreshLoading, object: nil)
+        
+        /// 启用MJRefresh
+        self.isEnableRefresh = true
     }
     
-    override func initData() {
+    open override func initData() {
         
     }
     
-    override func setupView() {
+    open override func setupView() {
         
     }
     
-    func setupCell(indexPath: IndexPath) -> UICollectionViewCell {
+    open func setupCell(indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath)
         
         while cell.contentView.subviews.last != nil {
@@ -53,8 +59,35 @@ open class BaseCollectionViewController: BaseViewController {
         return cell
     }
     
+    // MARK: - 属性
+    /// 默认启用MJRefresh
+    public var isEnableRefresh: Bool = true {
+        didSet {
+            if isEnableRefresh {
+                collectionView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
+                collectionView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
+            }else {
+                collectionView.mj_header = nil
+                collectionView.mj_footer = nil
+            }
+        }
+    }
+    
     // MARK: - 公共方法
-    @objc func refreshData(){
+    /// 下拉刷新
+    @objc open func refreshData(){
+        pageNo = 1
+        getDataSource()
+    }
+    
+    /// 上拉加载更多
+    @objc func loadMoreData(){
+        pageNo += 1
+        getDataSource()
+    }
+    
+    /// 调用接口获取数据
+    open func getDataSource() {
         
     }
     

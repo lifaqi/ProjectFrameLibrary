@@ -13,21 +13,21 @@ open class BaseViewController: UIViewController {
     private var leftTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
     private var rightTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
     
-    let group = AsyncGroup()
+    public let group = AsyncGroup()
     
     /// 是否禁用侧滑返回，默认是：false
     var isDisabledSideSlip: Bool = false
     
     // view
-    var headerView: UIView!
+    public var headerView: UIView!
     var baseTitleLbl: UILabel!
     var leftBtn: UIButton!
     var rightBtn: UIButton!
     
     // data
-    var baseNavTitle: String?
+    public var baseNavTitle: String?
     private var _isHiddenHeaderView = true
-    var isHiddenHeaderView: Bool {
+    public var isHiddenHeaderView: Bool {
         get {
             return _isHiddenHeaderView
         }
@@ -148,47 +148,47 @@ open class BaseViewController: UIViewController {
     }
     
     /// 初始化数据
-    func initData() {
+    open func initData() {
         
     }
     
     /// 构建UI
-    func setupView() {
+    open func setupView() {
         
     }
     
     /// 请求数据，刷新页面
-    func loadData() {
+    open func loadData() {
         
     }
     
     // MARK: - data source
-    var navTitle: String? {
+    public var navTitle: String? {
         didSet {
             baseTitleLbl.text = navTitle
         }
     }
     
-    var leftTitle: String? {
+    public var leftTitle: String? {
         didSet {
             leftBtn.setTitle(leftTitle, for: .normal)
         }
     }
     
-    var leftImage: String? {
+    public var leftImage: String? {
         didSet {
             leftBtn.setImage(UIImage(named: leftImage!), for: .normal)
         }
     }
     
-    var rightTitle: String? {
+    public var rightTitle: String? {
         didSet {
             rightBtn.isUserInteractionEnabled = true
             rightBtn.setTitle(rightTitle, for: .normal)
         }
     }
     
-    var rightImage: String? {
+    public var rightImage: String? {
         didSet {
             rightBtn.isUserInteractionEnabled = true
             rightBtn.setImage(UIImage(named: rightImage!), for: .normal)
@@ -196,7 +196,7 @@ open class BaseViewController: UIViewController {
     }
     
     // MARK: - func
-    @objc func clickLeftButtonEvent(sender: UIButton) {
+    @objc public func clickLeftButtonEvent(sender: UIButton) {
         if self.navigationController == nil {
             self.dismiss(animated: true, completion: nil)
         }else{
@@ -204,11 +204,11 @@ open class BaseViewController: UIViewController {
         }
     }
     
-    @objc func clickRightButtonEvent(sender: UIButton) {
+    @objc public func clickRightButtonEvent(sender: UIButton) {
         
     }
     
-    func showLeftBtn() {
+    public func showLeftBtn() {
         self.view.addSubview(leftBtn)
         leftBtn.snp.makeConstraints { make in
             make.left.equalTo(0)
@@ -218,7 +218,7 @@ open class BaseViewController: UIViewController {
         }
     }
     
-    func setupEmptyView(image: UIImage?, info: String, font: UIFont = .systemFont(ofSize: 14)) {
+    public func setupEmptyView(image: UIImage?, info: String, font: UIFont = .systemFont(ofSize: 14)) {
         // emptyView
         self.view.addSubview(emptyView)
         emptyView.snp.makeConstraints { make in
