@@ -87,7 +87,7 @@ public extension UITextView {
     }
     
     // MARK: - func
-    static func createTextView(font: UIFont = UIFont.systemFont(ofSize: 16), textColor: UIColor = BlackColor) -> UITextView {
+    static func createTextView(font: UIFont = UIFont.systemFont(ofSize: 16), textColor: UIColor = UIColor(r: 25, g: 25, b: 25, a: 1)) -> UITextView {
         textView = SWYTextView()
         textView.font = font
         textView.textColor = textColor

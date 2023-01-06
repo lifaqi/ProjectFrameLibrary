@@ -7,7 +7,11 @@
 
 import UIKit
 
-open class BaseView: UIView {
+open class SWYBaseView: UIView {
+    
+    public init() {
+        super.init(frame: CGRect.zero)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,15 +25,15 @@ open class BaseView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func initConfig() {
+    open func initConfig() {
         
     }
     
-    func initData() {
+    open func initData() {
         
     }
     
-    func setupView() {
+    open func setupView() {
         
     }
 

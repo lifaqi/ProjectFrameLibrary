@@ -25,7 +25,7 @@ public func rgba(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) -> UICo
     return UIColor(r: r, g: g, b: b, a: a)
 }
 
-public let SeparatorColor = UIColor(r: 230, g: 230, b: 230, a: 1)
+public var SeparatorColor = UIColor(r: 230, g: 230, b: 230, a: 1)
 public let BlackColor = UIColor(r: 25, g: 25, b: 25, a: 1)
 
 //  MARK: - 获取系统版本号和历史版本号

@@ -41,9 +41,6 @@ open class BaseTableViewController: BaseViewController, UITableViewDataSource, U
         super.mainNavView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(cancelRefreshLoading), name: CancelRefreshLoading, object: nil)
-        
-        /// 启用MJRefresh
-        self.isEnableRefresh = true
     }
     
     open override func initData() {
@@ -69,14 +66,23 @@ open class BaseTableViewController: BaseViewController, UITableViewDataSource, U
     }
     
     // MARK: - 属性
-    /// 默认启用MJRefresh
+    /// 启用下拉刷新
     public var isEnableRefresh: Bool = true {
         didSet {
             if isEnableRefresh {
                 tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
-                tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
             }else {
                 tableView.mj_header = nil
+            }
+        }
+    }
+    
+    /// 启用上拉加载更多
+    public var isEnableLoadingMore: Bool = false {
+        didSet {
+            if isEnableLoadingMore {
+                tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
+            }else {
                 tableView.mj_footer = nil
             }
         }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-@objc protocol SWYWaterfallsFlowLayoutDeleaget: NSObjectProtocol {
+@objc public protocol SWYWaterfallsFlowLayoutDeleaget: NSObjectProtocol {
     /// 每个item的高度
     func waterfallsFlowLayout(waterfallsFlowLayout: SWYWaterfallsFlowLayout, indexPath: IndexPath, itemWidth: CGFloat) -> CGFloat
     
@@ -17,7 +17,7 @@ import UIKit
 
 public class SWYWaterfallsFlowLayout: UICollectionViewFlowLayout {
     /// 代理
-    weak var delegate: SWYWaterfallsFlowLayoutDeleaget?
+    public weak var delegate: SWYWaterfallsFlowLayoutDeleaget?
     
     /// 列数
     var columnCount = 2

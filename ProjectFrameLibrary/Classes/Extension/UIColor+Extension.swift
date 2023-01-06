@@ -17,7 +17,7 @@ public extension UIColor {
         )
     }
     
-    static var random: UIColor {
+    static var getRandom: UIColor {
         return UIColor(red: CGFloat(arc4random_uniform(256))/255.0,
                        green: CGFloat(arc4random_uniform(256))/255.0,
                        blue: CGFloat(arc4random_uniform(256))/255.0,

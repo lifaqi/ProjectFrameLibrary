@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-open class BaseAlertView: BaseView {
+open class BaseAlertView: SWYBaseView {
     /// 可以自定义父类view
     private var topView: UIView = (UIApplication.getTopViewController()?.view)! {
         didSet {
@@ -36,21 +36,21 @@ open class BaseAlertView: BaseView {
         return view
     }()
     
-    lazy var superView: UIButton = {
+    lazy public var superView: UIButton = {
         let button = UIButton.createButton()
         button.backgroundColor = UIColor.clear
         return button
     }()
 
-    override func initConfig() {
+    open override func initConfig() {
         super.initConfig()
     }
     
-    override func initData() {
+    open override func initData() {
         super.initData()
     }
     
-    override func setupView() {
+    open override func setupView() {
         super.setupView()
         
         // bgView
@@ -70,7 +70,7 @@ open class BaseAlertView: BaseView {
     }
     
     // func
-    func showView(topView: UIView = (UIApplication.getTopViewController()?.view)!) {
+    public func showView(topView: UIView = (UIApplication.getTopViewController()?.view)!) {
         self.topView = topView
         
         UIView.animate(withDuration: 0.3) {
@@ -82,7 +82,7 @@ open class BaseAlertView: BaseView {
 
     }
     
-    func hiddenView() {
+    public func hiddenView() {
         UIView.animate(withDuration: 0.3) {
             self.bgView.alpha = 0
             self.superView.alpha = 0

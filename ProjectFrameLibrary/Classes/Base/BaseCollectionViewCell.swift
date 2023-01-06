@@ -8,12 +8,12 @@
 import UIKit
 
 open class BaseCollectionViewCell: UICollectionViewCell {
-    static var reuseIdentifier: String {
+    public static var reuseIdentifier: String {
         return NSStringFromClass(self)
     }
     
     /// cell高度
-    class func cellHeight() -> CGFloat { return 0 }
+    public class func cellHeight() -> CGFloat { return 0 }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,17 +27,17 @@ open class BaseCollectionViewCell: UICollectionViewCell {
     }
     
     /// 初始化数据
-    func initData() {
+    open func initData() {
         
     }
     
     /// 构建UI
-    func setupView() {
+    open func setupView() {
         
     }
     
     /// 加载数据
-    func loadData() {
+    open func loadData() {
         
     }
 }

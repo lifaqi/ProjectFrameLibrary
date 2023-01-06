@@ -8,5 +8,5 @@
 import UIKit
 
 open class BaseViewModel {
-    
+    public init() {}
 }

@@ -36,9 +36,6 @@ open class BaseCollectionViewController: BaseViewController {
         super.mainNavView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(cancelRefreshLoading), name: CancelRefreshLoading, object: nil)
-        
-        /// 启用MJRefresh
-        self.isEnableRefresh = true
     }
     
     open override func initData() {
@@ -60,14 +57,23 @@ open class BaseCollectionViewController: BaseViewController {
     }
     
     // MARK: - 属性
-    /// 默认启用MJRefresh
+    /// 启用下拉刷新
     public var isEnableRefresh: Bool = true {
         didSet {
             if isEnableRefresh {
                 collectionView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
-                collectionView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
             }else {
                 collectionView.mj_header = nil
+            }
+        }
+    }
+    
+    /// 启用上拉加载更多
+    public var isEnableLoadingMore: Bool = false {
+        didSet {
+            if isEnableLoadingMore {
+                collectionView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(loadMoreData))
+            }else {
                 collectionView.mj_footer = nil
             }
         }
@@ -105,19 +111,19 @@ open class BaseCollectionViewController: BaseViewController {
 }
 
 extension BaseCollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+    open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return UICollectionViewCell()
     }
     
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
     

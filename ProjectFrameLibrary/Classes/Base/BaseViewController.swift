@@ -8,21 +8,21 @@
 import UIKit
 
 open class BaseViewController: UIViewController {
-    private var navigationBarColor = UIColor(r: 245, g: 245, b: 245, a: 1)
-    private var titleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
-    private var leftTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
-    private var rightTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    public static var navigationBarColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    public static var titleColor = UIColor(r: 33, g: 33, b: 33, a: 1)
+    public static var leftTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    public static var rightTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
     
     public let group = AsyncGroup()
     
     /// 是否禁用侧滑返回，默认是：false
-    var isDisabledSideSlip: Bool = false
+    public var isDisabledSideSlip: Bool = false
     
     // view
     public var headerView: UIView!
-    var baseTitleLbl: UILabel!
-    var leftBtn: UIButton!
-    var rightBtn: UIButton!
+    public var baseTitleLbl: UILabel!
+    public var leftBtn: UIButton!
+    public var rightBtn: UIButton!
     
     // data
     public var baseNavTitle: String?
@@ -89,7 +89,7 @@ open class BaseViewController: UIViewController {
     func mainNavView() {
         // headerView
         headerView = UIView()
-        headerView.backgroundColor = navigationBarColor;
+        headerView.backgroundColor = BaseViewController.navigationBarColor;
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints { make in
             make.left.right.top.equalTo(0)
@@ -99,7 +99,7 @@ open class BaseViewController: UIViewController {
         // baseTitleLbl
         baseTitleLbl = UILabel()
         baseTitleLbl.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        baseTitleLbl.textColor = titleColor
+        baseTitleLbl.textColor = BaseViewController.titleColor
         baseTitleLbl.text = baseNavTitle ?? ""
         headerView.addSubview(baseTitleLbl)
         baseTitleLbl.snp.makeConstraints { make in
@@ -111,7 +111,7 @@ open class BaseViewController: UIViewController {
         // leftBtn
         leftBtn = UIButton()
         leftBtn.titleLabel?.font = UIFont .systemFont(ofSize: 15)
-        leftBtn.setTitleColor(leftTitleColor, for: .normal)
+        leftBtn.setTitleColor(BaseViewController.leftTitleColor, for: .normal)
         leftBtn.addTarget(self, action: #selector(clickLeftButtonEvent), for: .touchUpInside)
         headerView.addSubview(leftBtn)
         leftBtn.snp.makeConstraints { make in
@@ -135,7 +135,7 @@ open class BaseViewController: UIViewController {
         rightBtn = UIButton()
         rightBtn.titleLabel?.font = UIFont .systemFont(ofSize: 15)
         rightBtn.contentHorizontalAlignment = .center
-        rightBtn.setTitleColor(rightTitleColor, for: .normal)
+        rightBtn.setTitleColor(BaseViewController.rightTitleColor, for: .normal)
         rightBtn.isUserInteractionEnabled = false
         rightBtn.addTarget(self, action: #selector(clickRightButtonEvent), for: .touchUpInside)
         headerView.addSubview(rightBtn)

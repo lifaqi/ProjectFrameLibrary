@@ -10,7 +10,7 @@ import UIKit
 open class BaseTableViewCell: UITableViewCell {
 
     /// 重用标识
-    static var reuseIdentifier: String {
+    public static var reuseIdentifier: String {
         return NSStringFromClass(self)
     }
     
@@ -31,17 +31,17 @@ open class BaseTableViewCell: UITableViewCell {
     }
     
     /// 初始化数据
-    func initData() {
+    open func initData() {
         
     }
     
     /// 构建UI
-    func setupView() {
+    open func setupView() {
         
     }
     
     /// 加载数据
-    func loadData() {
+    open func loadData() {
         
     }
     

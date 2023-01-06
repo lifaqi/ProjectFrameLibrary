@@ -24,7 +24,7 @@ public enum ButtonImageStyle {
 }
 
 public extension UIButton {
-    static func createButton(size: CGFloat = 16, textColor: UIColor = BlackColor) -> UIButton {
+    static func createButton(size: CGFloat = 16, textColor: UIColor = UIColor(r: 25, g: 25, b: 25, a: 1)) -> UIButton {
         return self.createButton(size: size, textColor: textColor, style: .regular)
     }
     

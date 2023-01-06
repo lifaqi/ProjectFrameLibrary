@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Language : String {
+public enum Language : String {
     case english = "en"
     case chinese = "zh-Hans"
 }
@@ -29,7 +29,7 @@ extension Bundle {
     }
     
     /// 初始化
-    func onLanguage(){
+    public func onLanguage(){
         Bundle.onLanguageDispatchOnce()
     }
     
