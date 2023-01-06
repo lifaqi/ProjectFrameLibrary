@@ -10,8 +10,8 @@ import UIKit
 open class BaseViewController: UIViewController {
     public static var navigationBarColor = UIColor(r: 245, g: 245, b: 245, a: 1)
     public static var titleColor = UIColor(r: 33, g: 33, b: 33, a: 1)
-    public static var leftTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
-    public static var rightTitleColor = UIColor(r: 245, g: 245, b: 245, a: 1)
+    public static var leftTitleColor = UIColor(r: 50, g: 50, b: 50, a: 1)
+    public static var rightTitleColor = UIColor(r: 50, g: 50, b: 50, a: 1)
     
     public let group = AsyncGroup()
     
