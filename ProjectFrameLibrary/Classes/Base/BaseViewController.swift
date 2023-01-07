@@ -196,7 +196,7 @@ open class BaseViewController: UIViewController {
     }
     
     // MARK: - func
-    @objc public func clickLeftButtonEvent(sender: UIButton) {
+    @objc open func clickLeftButtonEvent(sender: UIButton) {
         if self.navigationController == nil {
             self.dismiss(animated: true, completion: nil)
         }else{
@@ -204,7 +204,7 @@ open class BaseViewController: UIViewController {
         }
     }
     
-    @objc public func clickRightButtonEvent(sender: UIButton) {
+    @objc open func clickRightButtonEvent(sender: UIButton) {
         
     }
     

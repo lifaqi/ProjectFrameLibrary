@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class SWYBaseView: UIView {
+open class BaseView: UIView {
     
     public init() {
         super.init(frame: CGRect.zero)
