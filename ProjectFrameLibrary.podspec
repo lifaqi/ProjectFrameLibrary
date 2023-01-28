@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ProjectFrameLibrary'
-  s.version          = '0.1.21'
+  s.version          = '0.1.22'
   s.summary          = 'iOS项目框架封装。'
 
 # This description is used to generate tags and improve search results.
@@ -33,7 +33,10 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'ProjectFrameLibrary/Classes/**/*'
   
-  s.resources = ['ProjectFrameLibrary/Assets/*.png']
+  # s.resources = ['ProjectFrameLibrary/Assets/*.png']
+  s.resource_bundles = {
+    'ProjectFrameLibrary' => ['ProjectFrameLibrary/Assets/*.png']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
