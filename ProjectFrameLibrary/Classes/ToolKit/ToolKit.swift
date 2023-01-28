@@ -14,6 +14,15 @@ public class ToolKit: NSObject {
         return Int(arc4random_uniform(endNumer - startNumber) + startNumber)
     }
     
+    // MARK: - 图片
+    /// imageName：必须是全名， 如：test@2x.png
+    public static func bundleForImage(imageName: String) -> UIImage {
+        let path = Bundle.main.path(forResource: "ProjectFrameLibrary", ofType: "bundle")
+        let bundle = Bundle(path: path!)
+        
+        return UIImage(contentsOfFile: bundle!.path(forResource: imageName, ofType: nil)!)!
+    }
+    
     //MARK: - SVProgressHUD
     public static func show() {
         changeShowType()

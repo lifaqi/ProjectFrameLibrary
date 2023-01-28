@@ -123,11 +123,11 @@ open class BaseViewController: UIViewController {
         // 判断初始化页面时是否显示leftBtn
         if (self.navigationController == nil) {
             if (leftBtn != nil) {
-                leftBtn.setImage(UIImage(named: "left_black"), for: .normal)
+                leftBtn.setImage(ToolKit.bundleForImage(imageName: "left_black@2x.png"), for: .normal)
             }
         }else {
             if (leftBtn != nil && (self.navigationController?.viewControllers.count)! > 1) {
-                leftBtn.setImage(UIImage(named: "left_black"), for: .normal)
+                leftBtn.setImage(ToolKit.bundleForImage(imageName: "left_black@2x.png"), for: .normal)
             }
         }
         
