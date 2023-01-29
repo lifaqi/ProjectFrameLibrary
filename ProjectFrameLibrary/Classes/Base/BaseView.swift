@@ -11,10 +11,6 @@ open class BaseView: UIView {
     
     public init() {
         super.init(frame: CGRect.zero)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
         
         initConfig()
         initData()
