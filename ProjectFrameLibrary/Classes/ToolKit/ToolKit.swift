@@ -17,8 +17,18 @@ public class ToolKit: NSObject {
     // MARK: - 图片
     /// imageName：必须是全名， 如：test@2x.png
     public static func bundleForImage(imageName: String) -> UIImage {
-        let path = Bundle.main.path(forResource: "ProjectFrameLibrary", ofType: "bundle")
-        let bundle = Bundle(path: path!)
+        var bundleUrl = Bundle.main.url(forResource: "Frameworks", withExtension: nil)
+        if #available(iOS 16.0, *) {
+            bundleUrl = bundleUrl?.appending(path: "ProjectFrameLibrary")
+        } else {
+            // Fallback on earlier versions
+            bundleUrl = bundleUrl?.appendingPathComponent("ProjectFrameLibrary")
+        }
+        bundleUrl = bundleUrl?.appendingPathExtension("framework")
+        
+        var bundle = Bundle(url: bundleUrl!)
+        bundleUrl = bundle?.url(forResource: "ProjectFrameLibrary", withExtension: "bundle")
+        bundle = Bundle(url: bundleUrl!)
         
         return UIImage(contentsOfFile: bundle!.path(forResource: imageName, ofType: nil)!)!
     }
