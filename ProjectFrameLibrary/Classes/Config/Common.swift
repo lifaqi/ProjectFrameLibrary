@@ -67,3 +67,10 @@ public var dateFormatter: DateFormatter = {
     df.locale = Locale.current // Locale.init(identifier: "zh_CN")
     return df
 }()
+
+public func SWYPrint<T>(_ object: T?, filename: String = #file, line: Int = #line, funcname: String = #function) {
+    #if DEBUG
+        guard let object = object else { return }
+        print("***** \(Date()) \(filename.components(separatedBy: "/").last ?? "") (line: \(line)) :: \(funcname) :: \(object)")
+    #endif
+}

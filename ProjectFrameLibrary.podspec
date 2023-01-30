@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ProjectFrameLibrary'
-  s.version          = '0.1.26'
+  s.version          = '0.1.27'
   s.summary          = 'iOS项目框架封装。'
 
 # This description is used to generate tags and improve search results.
