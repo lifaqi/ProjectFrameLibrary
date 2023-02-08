@@ -24,11 +24,7 @@ public enum ButtonImageStyle {
 }
 
 public extension UIButton {
-    static func createButton(size: CGFloat = 16, textColor: UIColor = UIColor(r: 25, g: 25, b: 25, a: 1)) -> UIButton {
-        return self.createButton(size: size, textColor: textColor, style: .regular)
-    }
-    
-    static func createButton(size: CGFloat, textColor: UIColor, style: UIFont.Weight) -> UIButton {
+    static func createButton(size: CGFloat = 16, textColor: UIColor = BlackColor, style: UIFont.Weight = .regular) -> UIButton {
         let button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: size, weight: style)
         button.setTitleColor(textColor, for: UIControl.State.normal)
@@ -182,7 +178,7 @@ public extension UIButton {
         self.imageEdgeInsets = imageEdgeInsets
     }
     
-    // MARK: - 添加点击事件
+    ///添加点击事件
     var isClickDelay: Bool {
         get {
             return _isClickDelay
@@ -296,7 +292,7 @@ public extension UIButton {
         return self
     }
     
-    // MARK: - 倒计时
+    /// 倒计时
     func countDown(second: NSInteger) {
         //倒计时时间
         var timeout = second
@@ -324,5 +320,13 @@ public extension UIButton {
             }
         })
         _timer.resume()
+    }
+    
+    /// 添加下划线
+    func setUnderlineStyle(color: UIColor? = nil, style: Int = NSUnderlineStyle.single.rawValue) {
+        let attributedString = NSMutableAttributedString(string: self.titleLabel?.text ?? "")
+        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: style, range: NSRange(location: 0, length: attributedString.length))
+        attributedString.addAttribute(NSAttributedString.Key.underlineColor, value: color ?? (self.titleLabel?.textColor ?? BlackColor), range: NSRange(location: 0, length: attributedString.length))
+        self.setAttributedTitle(attributedString, for: .normal)
     }
 }

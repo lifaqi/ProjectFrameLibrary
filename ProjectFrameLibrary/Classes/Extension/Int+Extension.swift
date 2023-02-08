@@ -8,11 +8,15 @@
 import Foundation
 
 public extension Int {
+    func toFloat() -> CGFloat {
+        return CGFloat(self)
+    }
+    
     func toDouble() -> Double {
-        Double(self)
+        return Double(self)
     }
     
     func toString() -> String {
-        String(format: "%d", self)
+        return String(format: "%d", self)
     }
 }

@@ -23,7 +23,7 @@ public extension UILabel {
         }
     }
     
-    static func createLabel(size: CGFloat = 16, textColor: UIColor = UIColor(r: 25, g: 25, b: 25, a: 1), style: UIFont.Weight = .regular) -> UILabel {
+    static func createLabel(size: CGFloat = 16, textColor: UIColor = BlackColor, style: UIFont.Weight = .regular) -> UILabel {
         let label = SWYUILabel()
         label.font = UIFont.systemFont(ofSize: size, weight: style)
         label.textColor = textColor

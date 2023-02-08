@@ -14,10 +14,12 @@ public extension String {
         }
     }
     
-    var toInt: Int {
-        get {
-            return Int(self) ?? 0
-        }
+    func toInt() -> Int {
+        return Int(self) ?? 0
+    }
+    
+    func toFloat() -> CGFloat {
+        return CGFloat(Double(self) ?? 0.0)
     }
     
     /// 去除空格和换行

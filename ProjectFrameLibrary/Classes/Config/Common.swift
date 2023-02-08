@@ -18,15 +18,16 @@ public let TabBarHeight: CGFloat = (SafeAreaInsets?.bottom ?? 0) + 49
 public let ScreenWidth = UIScreen.main.bounds.size.width
 public let ScreenHeight = UIScreen.main.bounds.size.height
 
-public var UIScreenWidth = 375.0 // UI设计原型图的手机尺寸宽度
+/// UI设计原型图的手机尺寸宽度，默认是375.0
+public var UIScreenWidth = 375.0
 
 // MARK: - 颜色
 public func rgba(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) -> UIColor {
     return UIColor(r: r, g: g, b: b, a: a)
 }
 
-public var SeparatorColor = UIColor(r: 230, g: 230, b: 230, a: 1)
-public let BlackColor = UIColor(r: 25, g: 25, b: 25, a: 1)
+public var SeparatorColor = rgba(230, 230, 230, 1)
+public let BlackColor = rgba(34, 34, 34, 1)
 
 //  MARK: - 获取系统版本号和历史版本号
 //获取当前版本号
