@@ -8,13 +8,9 @@
 import UIKit
 
 public extension UITextField {
-    static func createTextField(size: CGFloat = 16, textColor: UIColor = BlackColor, placeholder: String = "") -> UITextField {
-        return self.createTextField(size: size, textColor: textColor, placeholder: placeholder, style: .regular)
-    }
-    
-    static func createTextField(size: CGFloat, textColor: UIColor, placeholder: String, style: UIFont.Weight) -> UITextField {
+    static func createTextField(size: CGFloat = 16, textColor: UIColor = BlackColor, placeholder: String = "", style: UIFont.Weight = .regular) -> UITextField {
         let textField = UITextField()
-        textField.font = UIFont.systemFont(ofSize: size, weight: .regular)
+        textField.font = UIFont.systemFont(ofSize: size, weight: style)
         textField.textColor = textColor
         textField.placeholder = placeholder
         return textField
