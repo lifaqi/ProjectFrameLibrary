@@ -7,12 +7,8 @@
 
 import UIKit
 
-var expandSizeKey = "expandSizeKey"
-
-var startTime: Date?
-var endTime: Date?
-
-private var _isClickDelay = false
+private var startTime: Date?
+private var endTime: Date?
 
 public typealias BtnAction = (UIButton)->()
 
@@ -24,6 +20,48 @@ public enum ButtonImageStyle {
 }
 
 public extension UIButton {
+    /// “重新获取”文字自定义
+    var reSendTitle: String {
+        get {
+            if let title = objc_getAssociatedObject(self, &AssociatedKeys.countDownReSendTitleKey) as? String {
+                return title
+            }else {
+                return ""
+            }
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.countDownReSendTitleKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    /// 秒数前缀文字描述
+    var countDownTitlePre: String {
+        get {
+            if let titlePre = objc_getAssociatedObject(self, &AssociatedKeys.countDownTitlePreKey) as? String {
+                return titlePre
+            }else {
+                return ""
+            }
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.countDownTitlePreKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    /// 秒数后缀文字描述
+    var countDownTitleSuf: String {
+        get {
+            if let titleSuf = objc_getAssociatedObject(self, &AssociatedKeys.countDownTitleSufKey) as? String {
+                return titleSuf
+            }else {
+                return ""
+            }
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.countDownTitleSufKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
     static func createButton(size: CGFloat = 16, textColor: UIColor = BlackColor, style: UIFont.Weight = .regular) -> UIButton {
         let button = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: size, weight: style)
@@ -36,10 +74,10 @@ public extension UIButton {
     
     /// 按钮扩大点击区域
     func expandSize(size:CGFloat) {
-        objc_setAssociatedObject(self, &expandSizeKey,size, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
+        objc_setAssociatedObject(self, &AssociatedKeys.expandSizeKey,size, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
     }
     private func expandRect() -> CGRect {
-        let expandSize = objc_getAssociatedObject(self, &expandSizeKey)
+        let expandSize = objc_getAssociatedObject(self, &AssociatedKeys.expandSizeKey)
         if (expandSize != nil) {
             return CGRect(x: bounds.origin.x - (expandSize as! CGFloat), y: bounds.origin.y - (expandSize as! CGFloat), width: bounds.size.width + 2*(expandSize as! CGFloat), height: bounds.size.height + 2 * (expandSize as! CGFloat))
         }else{
@@ -178,20 +216,20 @@ public extension UIButton {
         self.imageEdgeInsets = imageEdgeInsets
     }
     
-    ///添加点击事件
+    /// 是否添加开启点击事件延迟1s
     var isClickDelay: Bool {
         get {
-            return _isClickDelay
+            if let clickDelay = objc_getAssociatedObject(self, &AssociatedKeys.countDownIsClickDelayKey) as? Bool {
+                return clickDelay
+            }else {
+                return false
+            }
         }
         set {
-            _isClickDelay = newValue
+            objc_setAssociatedObject(self, &AssociatedKeys.countDownIsClickDelayKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
-    /// gei button 添加一个属性 用于记录点击tag
-    private struct AssociatedKeys{
-        static var actionKey = "actionKey"
-    }
     @objc dynamic var actionDic: NSMutableDictionary? {
         set{
             objc_setAssociatedObject(self,&AssociatedKeys.actionKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_COPY)
@@ -222,7 +260,7 @@ public extension UIButton {
         }
     }
     @objc fileprivate func touchUpInSideBtnAction(btn: UIButton) {
-        if _isClickDelay {
+        if isClickDelay {
             if startTime == nil {
                 startTime = Date()
                 
@@ -252,7 +290,7 @@ public extension UIButton {
         }
     }
     @objc fileprivate func touchUpOutsideBtnAction(btn: UIButton) {
-        if _isClickDelay {
+        if isClickDelay {
             if startTime == nil {
                 startTime = Date()
                 
@@ -299,22 +337,24 @@ public extension UIButton {
         let queue:DispatchQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
         let _timer:DispatchSource = DispatchSource.makeTimerSource(flags: [], queue: queue) as! DispatchSource
         _timer.schedule(wallDeadline: DispatchWallTime.now(), repeating: .seconds(1))
-        //每秒执行
+        // 每秒执行
         _timer.setEventHandler(handler: { () -> Void in
             if(timeout<=0){ //倒计时结束，关闭
                 _timer.cancel();
                 DispatchQueue.main.sync(execute: { () -> Void in
-                    self.setTitle("重新获取", for: .normal)
+                    self.setTitle(self.reSendTitle, for: .normal)
                     self.isEnabled = true
-                    self.layer.backgroundColor = UIColor.orange.cgColor
                 })
-            }else{//正在倒计时
+            }else{ // 正在倒计时
                 let seconds = timeout
                 DispatchQueue.main.sync(execute: { () -> Void in
                     let str = String(describing: seconds)
-                    self.setTitle("\(str)秒", for: .normal)
+                    if self.countDownTitleSuf == "" {
+                        self.setTitle("\(self.countDownTitlePre)\(str)s", for: .normal)
+                    }else {
+                        self.setTitle("\(self.countDownTitlePre)\(str)\(self.countDownTitleSuf)", for: .normal)
+                    }
                     self.isEnabled = false
-                    self.layer.backgroundColor = UIColor.gray.cgColor
                 })
                 timeout -= 1;
             }
@@ -330,3 +370,14 @@ public extension UIButton {
         self.setAttributedTitle(attributedString, for: .normal)
     }
 }
+
+/// gei button 添加一个属性 用于记录点击tag
+private struct AssociatedKeys{
+    static var actionKey = "actionKey"
+    static var expandSizeKey = "expandSizeKey"
+    static var countDownTitlePreKey = "countDownTitlePreKey"
+    static var countDownTitleSufKey = "countDownTitleSufKey"
+    static var countDownReSendTitleKey = "countDownReSendTitleKey"
+    static var countDownIsClickDelayKey = "countDownIsClickDelayKey"
+}
+

@@ -22,6 +22,48 @@ public extension String {
         return CGFloat(Double(self) ?? 0.0)
     }
     
+    func toDate(format: String? = "yyyy-MM-dd HH:mm:ss") -> Date? {
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)
+    }
+    
+    var toString: String {
+        get {
+            var tempString = String(utf8String: self.cString(using: .utf8) ?? []) ?? ""
+            tempString = tempString.removingPercentEncoding ?? ""
+            
+            return tempString
+        }
+    }
+    
+    /// 根据下标取值
+    subscript(_ indexs: ClosedRange<Int>) -> String {
+        let beginIndex = index(startIndex, offsetBy: indexs.lowerBound)
+        let endIndex = index(startIndex, offsetBy: indexs.upperBound)
+        return String(self[beginIndex...endIndex])
+    }
+    
+    subscript(_ indexs: Range<Int>) -> String {
+        let beginIndex = index(startIndex, offsetBy: indexs.lowerBound)
+        let endIndex = index(startIndex, offsetBy: indexs.upperBound)
+        return String(self[beginIndex..<endIndex])
+    }
+    
+    subscript(_ indexs: PartialRangeThrough<Int>) -> String {
+        let endIndex = index(startIndex, offsetBy: indexs.upperBound)
+        return String(self[startIndex...endIndex])
+    }
+    
+    subscript(_ indexs: PartialRangeFrom<Int>) -> String {
+        let beginIndex = index(startIndex, offsetBy: indexs.lowerBound)
+        return String(self[beginIndex..<endIndex])
+    }
+    
+    subscript(_ indexs: PartialRangeUpTo<Int>) -> String {
+        let endIndex = index(startIndex, offsetBy: indexs.upperBound)
+        return String(self[startIndex..<endIndex])
+    }
+    
     /// 去除空格和换行
     mutating func trim() {
         self = self.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -30,33 +72,53 @@ public extension String {
     /// 验证邮箱格式是否正确
     func validateEmail() -> Bool {
         if self.count == 0 {
+            ToolKit.showError(msg: "请输入邮箱地址")
             return false
         }
         
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
         let emailTest:NSPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        return emailTest.evaluate(with: self)
+        
+        if emailTest.evaluate(with: self) {
+            return true
+        }else {
+            ToolKit.showError(msg: "邮箱地址格式不正确")
+            return false
+        }
     }
     
-    //验证手机号
-    func isPhoneNumber() -> Bool {
+    /// 验证手机号
+    func validatePhone() -> Bool {
         if self.count == 0 {
+            ToolKit.showError(msg: "请输入手机号")
             return false
         }
         
         let mobile = "^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])[0-9]{8}$"
         let regexMobile = NSPredicate(format: "SELF MATCHES %@",mobile)
-        return regexMobile.evaluate(with: self)
+        
+        if regexMobile.evaluate(with: self) {
+            return true
+        }else {
+            ToolKit.showError(msg: "手机号格式不正确")
+            return false
+        }
     }
     
     /// 验证身份证号
-    func isTrueIDNumber() -> Bool{
+    func validateID() -> Bool{
+        if self.count == 0 {
+            ToolKit.showError(msg: "请输入身份证号")
+            return false
+        }
+        
         var value = self
         value = value.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         var length : Int = 0
         length = value.count
         if length != 15 && length != 18{
             //不满足15位和18位，即身份证错误
+            ToolKit.showError(msg: "身份证号格式不正确")
             return false
         }
         // 省份代码
@@ -73,6 +135,7 @@ public extension String {
             }
         }
         if !areaFlag {
+            ToolKit.showError(msg: "身份证号格式不正确")
             return false
         }
         var regularExpression : NSRegularExpression?
@@ -96,6 +159,7 @@ public extension String {
             if numberofMatch! > 0 {
                 return true
             }else{
+                ToolKit.showError(msg: "身份证号格式不正确")
                 return false
             }
         case 18:
@@ -147,33 +211,45 @@ public extension String {
                     if M == "X" {
                         return true
                     }else{
+                        ToolKit.showError(msg: "身份证号格式不正确")
                         return false
                     }
                 }else{
                     if M == lastStr {
                         return true
                     }else{
+                        ToolKit.showError(msg: "身份证号格式不正确")
                         return false
                     }
                 }
                 
             }else{
+                ToolKit.showError(msg: "身份证号格式不正确")
                 return false
             }
         default:
+            ToolKit.showError(msg: "身份证号格式不正确")
             return false
         }
     }
     
-    func getStringByRangeIntValue(str: NSString, location: Int, length: Int) -> Int{
+    private func getStringByRangeIntValue(str: NSString, location: Int, length: Int) -> Int{
         let a = str.substring(with: NSRange(location: location, length: length))
         let intValue = (a as NSString).integerValue
         return intValue
     }
     
-    // MARK: - 日期
-    func toDate(format: String? = "yyyy-MM-dd HH:mm:ss") -> Date? {
-        dateFormatter.dateFormat = format
-        return dateFormatter.date(from: self)
+    /// 获取单词首字母
+    var getFirstWord: String {
+        get {
+            if let str1 = self.applyingTransform(.toLatin, reverse: false) {
+                if let str2 = str1.applyingTransform(.stripCombiningMarks, reverse: false) {
+                    let str3 = str2[0..<1].uppercased()
+                    return str3
+                }
+            }
+            
+            return ""
+        }
     }
 }

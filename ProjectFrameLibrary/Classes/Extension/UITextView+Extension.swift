@@ -7,98 +7,133 @@
 
 import UIKit
 
-private var _placeholder = ""
-private var _placeholderColor = rgba(200, 200, 200, 1)
-private var _leftPaddding = 15.ad
-private var _rightPaddding = 15.ad
-private var _topPaddding = 15.ad
-private var _maxHeight = 150.0
-private var _maxWordNum = 0
-
 public typealias ShouldChangeTextInCallBack = (_ textView: UITextView, _ range: NSRange, _ text: String) -> (Bool)
 public typealias TextViewDidChangeCallBack = (_ textView: UITextView) -> ()
 
 var textView: SWYTextView!
 
-var placeholderLabel: UILabel!
-
 public extension UITextView {
     
     // MARK: - property
+    /// 要放在text复制的后面，要依据是否有初始化值来判断是否显示placeholder
     var placeholder: String {
         get {
-            return _placeholder
+            if let value = objc_getAssociatedObject(self, &AssociatedKeys.placeholderKey) as? String {
+                return value
+            }
+            return ""
         }
         set {
-            _placeholder = newValue
+            objc_setAssociatedObject(self, &AssociatedKeys.placeholderKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
-            // placeholderLabel
-            placeholderLabel = UILabel.createLabel()
-            self.addSubview(placeholderLabel)
-            placeholderLabel.font = self.font
-            placeholderLabel.textColor = _placeholderColor
-            placeholderLabel.text = _placeholder
-            self.setValue(placeholderLabel, forKey: "_placeholderLabel")
+            textView.basePlaceholder = newValue
         }
     }
     
     var placeholderColor: UIColor {
         get {
-            return _placeholderColor
+            if let color = objc_getAssociatedObject(self, &AssociatedKeys.placeholderColorKey) as? UIColor {
+                return color
+            }
+            return rgba(200, 200, 200, 1)
         }
         set {
-            _placeholderColor = newValue
+            objc_setAssociatedObject(self, &AssociatedKeys.placeholderColorKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
-            placeholderLabel.textColor = newValue
+            textView.basePlaceholderColor = newValue
         }
     }
     
+    /// 左右边距
     var leftPadding: CGFloat {
         get {
-            return _leftPaddding
+            if let padding = objc_getAssociatedObject(self, &AssociatedKeys.leftPaddingKey) as? CGFloat {
+                return padding
+            }
+            return 15
         }
         set {
-            _leftPaddding = newValue
+            objc_setAssociatedObject(self, &AssociatedKeys.leftPaddingKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
-            self.textContainer.lineFragmentPadding = _leftPaddding
+            textView.baseLeftPadding = newValue
         }
     }
     
-    var maxHeight: Double {
+    /// 上下边距
+    var topPadding: CGFloat {
         get {
-            return _maxHeight
+            if let padding = objc_getAssociatedObject(self, &AssociatedKeys.topPaddingKey) as? CGFloat {
+                return padding
+            }
+            return 15
         }
         set {
-            _maxHeight = newValue
+            objc_setAssociatedObject(self, &AssociatedKeys.topPaddingKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
+            textView.baseTopPadding = newValue
+        }
+    }
+    
+    /// 最大高度
+    var maxHeight: CGFloat {
+        get {
+            if let height = objc_getAssociatedObject(self, &AssociatedKeys.maxHeightKey) as? CGFloat {
+                return height
+            }
+            return 0
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.maxHeightKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+
             textView.baseMaxHeight = newValue
         }
     }
-    
-    var maxWordNum: Int {
+
+    /// 最大长度，放在text的后面，如果初始化了，根据初始化的值做判断是否超了最大长度
+    var maxLength: Int {
         get {
-            return _maxWordNum
+            if let length = objc_getAssociatedObject(self, &AssociatedKeys.maxLengthKey) as? Int {
+                return length
+            }
+            return 0
         }
         set {
-            _maxWordNum = newValue
+            objc_setAssociatedObject(self, &AssociatedKeys.maxLengthKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             
             textView.baseMaxWordNum = newValue
+            
+            if self.text.count > maxLength {
+                self.text = self.text[0..<maxLength]
+            }
         }
     }
     
     // MARK: - func
-    static func createTextView(size: CGFloat = 16, textColor: UIColor = BlackColor, style: UIFont.Weight = .regular) -> UITextView {
+    static func createTextView(size: CGFloat = 16, textColor: UIColor = BlackColor, placeholder: String = "", style: UIFont.Weight = .regular) -> SWYTextView {
         textView = SWYTextView()
         textView.font = UIFont.systemFont(ofSize: size, weight: style)
         textView.textColor = textColor
+        
         return textView
     }
+    
     
     func shouldChangeTextInCallBack(shouldChangeTextInCallBack: @escaping ShouldChangeTextInCallBack) {
         textView.shouldChangeTextInCallBack = shouldChangeTextInCallBack
     }
-    
+
     func textViewDidChangeCallBack(textViewDidChangeCallBack: @escaping TextViewDidChangeCallBack) {
         textView.textViewDidChangeCallBack = textViewDidChangeCallBack
     }
 }
+
+private struct AssociatedKeys {
+    static var placeholderKey = "placeholderKey"
+    static var placeholderColorKey = "placeholderColorKey"
+    static var leftPaddingKey = "leftPaddingKey"
+    static var topPaddingKey = "topPaddingKey"
+    static var maxLengthKey = "maxLengthKey"
+    static var maxHeightKey = "maxHeightKey"
+    
+}
+

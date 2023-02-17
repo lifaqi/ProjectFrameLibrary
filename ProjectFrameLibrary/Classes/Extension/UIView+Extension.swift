@@ -7,6 +7,11 @@
 
 import UIKit
 
+public enum GradientLayerDirection {
+    case topToBottom
+    case leftToRight
+}
+
 public extension UIView {
     /// 添加圆角
     var cornerRadius: Double {
@@ -33,5 +38,27 @@ public extension UIView {
         self.layer.shadowOffset = CGSize.init(width: 0, height: 0);
         self.layer.shadowRadius = radius;
         self.layer.shadowOpacity = 0.5;
+    }
+    
+    /// 设置渐变色
+    func setGradientLayer(colors: [CGColor], direction: GradientLayerDirection = .topToBottom, locations: [NSNumber]? = nil) {
+        self.layoutIfNeeded() // 刷新布局属性
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors
+        if locations != nil {
+            gradientLayer.locations = locations!
+        }
+        
+        if direction == .topToBottom {
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        }else if direction == .leftToRight {
+            gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        }
+        
+        gradientLayer.frame = self.bounds
+        self.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
