@@ -29,10 +29,13 @@ public extension Double {
         }
     }
     
-    /// aminnum -- 最小保留小数位数
-    /// maximum -- 最大保留小数位数
-    /// numberStyle -- decimal:小数形式 spellOut:中文形式表示 scientific:科学计数法表示
-    /// roundingMode -- halfUp:四舍五入 ceiling:向上取整 floor:向下取整
+    /// Double to String
+    /// - Parameters:
+    ///   - minimum: 最小保留小数位数
+    ///   - maximum: 最大保留小数位数
+    ///   - numberStyle:decimal:小数形式 spellOut:中文形式表示 scientific:科学计数法表示
+    ///   - roundingMode: halfUp:四舍五入 ceiling:向上取整 floor:向下取整
+    /// - Returns: 返回一个String
     func toString(minimum: Int = 0, maximum: Int = 2, numberStyle: NumberFormatter.Style = .decimal, roundingMode: NumberFormatter.RoundingMode = .halfUp) -> String {
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = minimum // 设置小数点后最少几位

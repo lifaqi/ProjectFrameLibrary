@@ -8,25 +8,30 @@
 import Foundation
 
 public extension String {
+    /// 多语言处理
     var localizable: String {
         get {
             return NSLocalizedString(self, comment: "")
         }
     }
     
+    /// String to Int
     func toInt() -> Int {
         return Int(self) ?? 0
     }
     
+    /// String to CGFloat
     func toFloat() -> CGFloat {
         return CGFloat(Double(self) ?? 0.0)
     }
     
-    func toDate(format: String? = "yyyy-MM-dd HH:mm:ss") -> Date? {
-        dateFormatter.dateFormat = format
+    /// String to Date
+    func toDate(dateFormat: String? = "yyyy-MM-dd HH:mm:ss") -> Date? {
+        dateFormatter.dateFormat = dateFormat
         return dateFormatter.date(from: self)
     }
     
+    /// 解码 URL 编码字符串
     var toString: String {
         get {
             var tempString = String(utf8String: self.cString(using: .utf8) ?? []) ?? ""

@@ -10,7 +10,7 @@ import UIKit
 private var startTime: Date?
 private var endTime: Date?
 
-public typealias BtnAction = (UIButton)->()
+public typealias BtnAction = (_ button: UIButton)->()
 
 public enum ButtonImageStyle {
     case top /// image在上，label在下

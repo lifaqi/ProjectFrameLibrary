@@ -65,7 +65,7 @@ public let deviceUUID = FCUUID.uuidForDevice()
 public var dateFormatter: DateFormatter = {
     let df = DateFormatter()
     df.timeZone = TimeZone.current
-    df.locale = Locale.current // Locale.init(identifier: "zh_CN")
+    df.locale = Locale.init(identifier: "zh_CN")
     return df
 }()
 
