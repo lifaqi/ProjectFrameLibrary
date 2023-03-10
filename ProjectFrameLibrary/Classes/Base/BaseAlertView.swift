@@ -24,7 +24,7 @@ open class BaseAlertView: BaseView {
             superView.snp.makeConstraints { make in
                 make.edges.equalTo(topView)
             }
-            superView.addTouchUpInSideBtnAction { button in
+            superView.addTouchUpInSideAction { button in
                 self.hiddenView()
             }
         }
@@ -64,7 +64,7 @@ open class BaseAlertView: BaseView {
         superView.snp.makeConstraints { make in
             make.edges.equalTo(topView)
         }
-        superView.addTouchUpInSideBtnAction { button in
+        superView.addTouchUpInSideAction { button in
             self.hiddenView()
         }
     }

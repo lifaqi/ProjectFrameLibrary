@@ -7,6 +7,8 @@
 
 import UIKit
 
+public typealias AddTouchUpInSideAction = (_ textField: UITextField)->()
+
 public extension UITextField {
     static func createTextField(size: CGFloat = 16, textColor: UIColor = BlackColor, placeholder: String = "", style: UIFont.Weight = .regular) -> UITextField {
         let textField = UITextField()
@@ -21,6 +23,7 @@ public extension UITextField {
         textField.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         textField.layer.shadowOpacity = 1.0
         textField.layer.shadowRadius = 0.0
+        textField.layer.shadowColor = rgba(239, 239, 239, 1).cgColor
         
         return textField
     }
@@ -34,6 +37,10 @@ public extension UITextField {
             return Int.max
         }
         set {
+            if self.delegate == nil {
+                self.delegate = self
+            }
+            
             objc_setAssociatedObject(self, &AssociatedKeys.maxLength, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             addTarget(self, action: #selector(limitLength), for: .editingChanged)
         }
@@ -69,6 +76,25 @@ public extension UITextField {
         }
     }
     
+    
+    /// 是否可以编辑，默认：true
+    @IBInspectable var isEdit: Bool {
+        get {
+            if let edit = objc_getAssociatedObject(self, &AssociatedKeys.isEdit) as? Bool {
+                return edit
+            }else {
+                return true
+            }
+        }
+        set {
+            if self.delegate == nil {
+                self.delegate = self
+            }
+            
+            objc_setAssociatedObject(self, &AssociatedKeys.isEdit, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
     // MARK: - func
     // 辅助方法，用于限制文本框的输入字符数
     @objc func limitLength() {
@@ -86,10 +112,33 @@ public extension UITextField {
     @objc func textFieldSelectUnderLineColor(textField: UITextField) {
         textField.layer.shadowColor = underLineColor.cgColor
     }
+    
+    func addTouchUpInSideAction(_ callback: @escaping AddTouchUpInSideAction){
+        self.isEdit = false
+        
+        self.isUserInteractionEnabled = true
+        self.addTarget(self, action: #selector(touchUpInSideAction), for: .touchDown)
+        
+        objc_setAssociatedObject(self, &AssociatedKeys.addTouchUpInSideAction, callback, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+    
+    @objc fileprivate func touchUpInSideAction(textField: UITextField) {
+        if let callback = objc_getAssociatedObject(self, &AssociatedKeys.addTouchUpInSideAction) as? AddTouchUpInSideAction {
+            callback(textField)
+        }
+    }
+}
+
+extension UITextField: UITextFieldDelegate {
+    public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return self.isEdit
+    }
 }
 
 private struct AssociatedKeys {
-    static var maxLength = "textFieldMaxLength"
-    static var underLineColor = "textFieldUnderLineColor"
-    static var selectUnderLineColor = "textFieldSelectUnderLineColor"
+    static var maxLength = "maxLength"
+    static var underLineColor = "underLineColor"
+    static var selectUnderLineColor = "selectUnderLineColor"
+    static var isEdit = "isEdit"
+    static var addTouchUpInSideAction = "addTouchUpInSideAction"
 }
